@@ -4,12 +4,11 @@
 Lego® is a Trademark by THE LEGO GROUP, Billund, Denmark.
 
 # Features
-Player can guess word by typing letters. Every wrong letter will add a new dummy body part.
+Player can guess word by typing letters. 
+Every wrong letter will add a new dummy body part.
+If player has 6 wrong letters dummy is hanged.
 If player guesses 5 words wins the game. 
-
-
-### Installation
-Game should be played online or test in Firefox, otherwise the JSON file won't open (due to security reasons).
+Player can replay with a different set of words.
 
 ### Plugins
-Additional word banks can be added by editing wordList.JSON file (words+clues).
+Additional word banks can be added by editing "data.js" (words+clues).
