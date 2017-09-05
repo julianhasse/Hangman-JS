@@ -32,7 +32,7 @@ r(function(){
 
 /* ----- Opening screen + start button ----- */
 function titleScreen(){ 
-	document.getElementById("gameContent").innerHTML = ('<div id="gameTitle">NEW GAME</div><div id="startButton" class="button">PLAY</div>');
+	document.getElementById("gameContent").innerHTML = ('<div id="gameTitle">START</div><div id="startButton" class="button">Level 2</div>');
 	document.body.innerHTML += '<footer id="footerGame">All Rights Reserved&reg; 2017<div id="logoLego"><img class="legoBrick" src="images/redBrick.png"></div></footer>';		
 	document.getElementById("startButton").onclick = function(){gameScreen()};
 } // titleScreen
@@ -144,7 +144,7 @@ function defeatMessage(){
 function finalPageVictory(){
 	document.getElementById("gameContent").innerHTML = "" // clears game area
 	success.play(); // plays victory audio
-	document.getElementById("gameContent").innerHTML += ('<div id="finalMessage">You have guessed all the words!</div>');
+	document.getElementById("gameContent").innerHTML += ('<div id="finalMessage">You are a winner!</div>');
 	document.getElementById("gameContent").innerHTML += ('<div id="finalMessage"><a href="index3.html"><button class="buttonNew">Credits</button></a></div>');
 	document.getElementById("gameContent").innerHTML += ('<footer id="footerGameVic">All Rights Reserved&reg; 2017><div id="logoLego"><img class="legoBrick" src="images/redBrickVictory.png"></div></footer>')
 
