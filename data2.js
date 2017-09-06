@@ -26,4 +26,4 @@ var wordlist = [
 		"clue":"a machine"
 	}
       
-  ]
+  ];
