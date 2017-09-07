@@ -13,16 +13,16 @@ r(function(){
 		theme.loop = true; // theme loops
 		theme.volume = 0.5; // set volume
 		
-	/* ----- Calls titleScreen ----- */	
+	/* ----- Calls openScreen ----- */	
 		(function(){  
-					titleScreen(); // calls opening screen
+					openScreen(); // calls opening screen
 		 })(); // function()
 	
 	/* ----- Credits ----- */
-	function titleScreen(){ 
+	function openScreen(){ 
 		theme.play(); // plays theme
 		document.getElementById("gameContent").innerHTML = ('<div id="gameTitle">HANGMAN<sup>&reg;</sup></div><div id="startButton" class="button">THE GAME</div>');
-	} // titleScreen
+	} // openScreen
 	
 		
 	});
