@@ -8,9 +8,9 @@ r(function(){
 	
 	
 	/* ----- Declare variables and create arrays ----- */
-		var questionBank = [];
+		var questionList = [];
 		var wordArray = [];
-		var previousGuesses = [];
+		var pastGuesses = [];
 		 var currentWord;
 		var currentClue;
 		var wrongAnswerCount;
@@ -22,24 +22,24 @@ r(function(){
 		
 	/* ----- Reads words from local file (data.js) ----- */	
 		(function(){  
-			for(i = 0; i < wordlist.length; i++){   // words and clues are stored in questionbank array
-				questionBank[i] = [];
-				questionBank[i][0] = wordlist[i].word;
-				questionBank[i][1] = wordlist[i].clue;
+			for(i = 0; i < wordlist.length; i++){   // words and clues are stored in questionList array
+				questionList[i] = [];
+				questionList[i][0] = wordlist[i].word;
+				questionList[i][1] = wordlist[i].clue;
 			}
-			titleScreen(); // calls opening screen
+			openScreen(); // calls opening screen
 		 })(); // function()
 	
 	/* ----- Opening screen + start button ----- */
-	function titleScreen(){ 
+	function openScreen(){ 
 		document.getElementById("gameContent").innerHTML = ('<div id="gameTitle">START</div><div id="startButton" class="button">Level 2</div>');
 		document.body.innerHTML += '<footer id="footerGame">All Rights Reserved&reg; 2017<div id="logoLego"><img class="legoBrick" src="images/redBrick.png"></div></footer>';		
-		document.getElementById("startButton").onclick = function(){gameScreen();};
-	} // titleScreen
+		document.getElementById("startButton").onclick = function(){mainScreen();};
+	} // openScreen
 		
 		
 	/* ----- Setup main screen ----- */
-	function gameScreen(){
+	function mainScreen(){
 		document.getElementById("gameContent").innerHTML = ""; // clears game area
 		theme.play(); // plays theme
 		document.getElementById("gameContent").innerHTML = ('<div id="pixHolder"><img id="hangman" src="images/man.png"></div>');
@@ -53,7 +53,7 @@ r(function(){
 		getWord(); // Sets tiles for every letter of the selected word
 		var numberOfTiles = currentWord.length; 
 		wrongAnswerCount = 0; // initialize wrongAnswer
-		previousGuesses = []; // initialize array of previousGuess
+		pastGuesses = []; // initialize array of previousGuess
 				 
 		for( i = 0; i < numberOfTiles; i++){ // creates tiles for letters on screen
 			document.getElementById("wordHolder").innerHTML += ('<div class="tile" id=t'+i+'></div>');
@@ -63,15 +63,15 @@ r(function(){
 		document.addEventListener("keyup", handleKeyUp);
 		document.addEventListener("click", function(){document.getElementById("dummy").focus();});
 		document.getElementById("dummy").focus();
-	}// gamescreen
+	}// mainScreen
 	
 	
-	/* ----- Generates a random word and clue from the questionBank -----*/
+	/* ----- Generates a random word and clue from the questionList -----*/
 	function getWord(){   
-		var rnd=Math.floor(Math.random()*questionBank.length);
-		currentWord=questionBank[rnd][0];
-		currentClue=questionBank[rnd][1];
-		questionBank.splice(rnd,1); 
+		var rnd=Math.floor(Math.random()*questionList.length);
+		currentWord=questionList[rnd][0];
+		currentClue=questionList[rnd][1];
+		questionList.splice(rnd,1); 
 		wordArray=currentWord.split(""); // splits the word			
 	}// getword
 				
@@ -83,10 +83,10 @@ r(function(){
 			var previouslyEntered=false;
 			var input=String.fromCharCode(event.keyCode).toLowerCase();
 		
-			for(i=0;i<previousGuesses.length;i++){if(input==previousGuesses[i]){previouslyEntered=true;}}
+			for(i=0;i<pastGuesses.length;i++){if(input==pastGuesses[i]){previouslyEntered=true;}}
 					
 			if(!previouslyEntered){
-				previousGuesses.push(input);
+				pastGuesses.push(input);
 				for(i=0;i<wordArray.length;i++){
 					if(input==wordArray[i]){found=true;document.getElementById("t"+i).innerHTML += (input);}	
 				}// for
@@ -123,8 +123,8 @@ r(function(){
 		document.addEventListener("keydown", handleKeyUp);
 		document.getElementById("feedback").innerHTML += ("CORRECT!<br><br><div id='replay' class='button'>MORE WORDS</div>");
 		document.getElementById("replay").onclick = function(){
-			if(questionBank.length>0){
-				gameScreen();}
+			if(questionList.length>0){
+				mainScreen();}
 			else{finalPageVictory();}
 		};
 	}// victory
@@ -135,8 +135,8 @@ r(function(){
 		document.addEventListener("keydown", handleKeyUp);
 		document.getElementById("feedback").innerHTML += ("You are Dead!<br>(answer is "+ currentWord +")<div id='replay' class='button'>TRY AGAIN</div>");
 		document.getElementById("replay").onclick = function(){
-			if(questionBank.length>0){
-				gameScreen();}
+			if(questionList.length>0){
+				mainScreen();}
 			else{finalPageDefeat();}
 		};
 	}// defeat
